@@ -1,27 +1,38 @@
 // import CheckBox from '@react-native-community/checkbox'
 import React, { useState } from 'react'
-import { View } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 
 const ToDoItem = ({
   styles,
   title,
+  index,
+  handleDeleteToDo,
 }) => {
-  console.log(title)
 
   const [isCompleted, setIsCompleted] = useState(false)
 
+
   return (
-    <View>
+    <View style={styles.item}>
       {/* <CheckBox 
         disabled={false}
         value={isCompleted}
         onValueChange={() => setIsCompleted(!isCompleted)}
       /> */}
       <BouncyCheckbox 
-        onPress={() => setIsCompleted(!isCompleted)}      
+        style={{width: '80%'}}
+        onPress={() => setIsCompleted(!isCompleted)} 
+        text={title}
+        textStyle={styles.text}   
+        fillColor='green'  
       />
-      <Text style={styles.text}>todo</Text>
+      <Pressable 
+        style={styles.deleteButton}
+        onPress={() => handleDeleteToDo(index)}
+      >
+        <Text>X</Text>
+      </Pressable>
     </View>
   )
 }
